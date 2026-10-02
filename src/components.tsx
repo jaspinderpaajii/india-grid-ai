@@ -1,0 +1,12 @@
+import type { ReactNode } from 'react';
+import { AlertCircle, ArrowUpRight, LoaderCircle, RotateCw } from 'lucide-react';
+export function Panel({children, className = ''}: {children: ReactNode; className?: string}) { return <section className={`panel ${className}`}>{children}</section>; }
+export function PanelHeading({title, detail, action}: {title: string; detail?: string; action?: ReactNode}) { return <div className="panel-heading"><div><h3>{title}</h3>{detail && <p>{detail}</p>}</div>{action}</div>; }
+export function MetricCard({label, value, unit, detail, icon, tone = 'blue'}: {label: string; value: string; unit?: string; detail: string; icon: ReactNode; tone?: string}) { const displayValue = value === '—' ? value : unit === 'MW' ? (Number(value) / 1000).toFixed(3) : unit === 'MWh' ? (Number(value) / 1000).toFixed(2) : value; const displayUnit = unit === 'MW' ? 'GW' : unit === 'MWh' ? 'GWh' : unit; return <Panel className="metric-card"><div className="metric-top"><span>{label}</span><span className={`metric-icon ${tone}`}>{icon}</span></div><div className="metric-value">{displayValue}<small>{displayUnit}</small></div><p>{detail}</p></Panel>; }
+export function Loading({message = 'Loading measured data…'}: {message?: string}) { return <div className="state-box" role="status"><LoaderCircle className="spin" size={25}/><p>{message}</p></div>; }
+export function ErrorState({message, retry}: {message: string; retry?: () => void}) { return <div className="state-box error-box" role="alert"><AlertCircle size={25}/><h3>Something needs attention</h3><p>{message}</p>{retry && <button className="button" onClick={retry}><RotateCw size={15}/>Try again</button>}</div>; }
+export function Status({value}: {value: string}) { return <span className={`risk risk-${value.toLowerCase()}`}><i/>{value}</span>; }
+export function Intro({eyebrow, title, text, action}: {eyebrow: string; title: string; text: string; action?: ReactNode}) { return <div className="page-intro"><div><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p className="intro-text">{text}</p></div>{action}</div>; }
+export function LinkArrow({children, onClick}: {children: ReactNode; onClick: () => void}) { return <button className="text-button" onClick={onClick}>{children}<ArrowUpRight size={15}/></button>; }
+export const chartTheme = { backgroundColor: '#162235', border: '1px solid #35475f', borderRadius: 10, color: '#e6edf7', fontSize: 12 };
+export const axis = { stroke: '#8090a6', tickLine: false, axisLine: false, fontSize: 11 };

@@ -1,0 +1,31 @@
+{
+  "name": "mumbai-grid-ai",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:ui": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "train": "node scripts/python.mjs -m backend.train",
+    "test": "node scripts/python.mjs -m unittest discover -s tests -v",
+    "start": "node scripts/python.mjs -m uvicorn backend.app:app --host 127.0.0.1 --port 8000"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3"
+  }
+}
